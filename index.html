@@ -65,30 +65,34 @@
             color: var(--text-secondary);
         }
 
-        /* Seção de destaque principal */
+        /* Seção de destaque principal - Estilo Apple Dark */
         .hero {
             text-align: center;
-            padding: 120px 20px;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            padding: 140px 20px;
+            background-color: #000000;
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: 4.5rem;
             font-weight: 700;
-            letter-spacing: -0.04em;
+            letter-spacing: -0.06em; /* Letras mais unidas, traço moderno */
             margin-bottom: 20px;
-            color: var(--accent-color);
+            /* Efeito de texto prateado/gradiente */
+            background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 1.25rem;
-            color: #515154;
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #86868b;
             margin-bottom: 30px;
             max-width: 650px;
             margin-left: auto;
             margin-right: auto;
-            line-height: 1.6;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
         }
 
         /* Grid de Produtos */
@@ -103,6 +107,7 @@
             font-size: 2rem;
             margin-bottom: 40px;
             font-weight: 600;
+            letter-spacing: -0.03em;
         }
 
         .grid {
@@ -138,6 +143,7 @@
             margin: 20px 0 8px;
             font-size: 1.1rem;
             font-weight: 500;
+            letter-spacing: -0.01em;
         }
 
         .card p {
@@ -174,8 +180,14 @@
 
         /* Regras de Responsividade para Celulares */
         @media (max-width: 768px) {
+            .hero {
+                padding: 100px 20px;
+            }
             .hero h1 {
-                font-size: 2.8rem;
+                font-size: 3.2rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
             }
             header {
                 flex-direction: column;
