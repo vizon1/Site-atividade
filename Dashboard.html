@@ -70,4 +70,203 @@
             text-align: center;
             padding: 120px 20px;
             background-color: var(--accent-color);
-            color: #
+            color: #ffffff;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 600;
+            letter-spacing: -0.05em;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #a1a1a6;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Grid de Produtos */
+        .products-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 5%;
+        }
+
+        .products-container h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        /* Cartão de Produto individual */
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            text-align: center;
+            padding-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+        }
+
+        .card img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            background-color: #f5f5f7;
+        }
+
+        .card h3 {
+            margin: 20px 0 8px;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: var(--text-main);
+            color: #ffffff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #424245;
+        }
+
+        /* Rodapé */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #f5f5f7;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Regras de Responsividade para Celulares */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            nav a {
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">ASTRA</a>
+        <nav>
+            <a href="#lancamentos">Lançamentos</a>
+            <a href="#masculino">Masculino</a>
+            <a href="#feminino">Feminino</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>O básico elevado.</h1>
+            <p>Descubra a nova coleção de camisetas em tons neutros. Conforto absoluto, corte perfeito e design atemporal para o seu dia a dia.</p>
+        </section>
+
+        <section class="products-container" id="lancamentos">
+            <h2>Coleção Essencial</h2>
+            <div class="grid">
+                
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80" alt="Camiseta Branca Clássica ASTRA" loading="lazy">
+                    <h3>Camiseta Branca Clássica</h3>
+                    <p>R$ 129,00</p>
+                    <button class="buy-btn">Adicionar à Sacola</button>
+                </article>
+
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=600&q=80" alt="Camiseta Preta Essencial ASTRA" loading="lazy">
+                    <h3>Camiseta Preta Essencial</h3>
+                    <p>R$ 129,00</p>
+                    <button class="buy-btn">Adicionar à Sacola</button>
+                </article>
+
+                <article class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaafeCSspnqV_Jo8NSsjeqFAuM-nzf0BkDYGYYo-sdpa6YMUIR4r4uH-Y6&s=10" alt="Camiseta Cinza Chumbo ASTRA" loading="lazy">
+                    <h3>Camiseta Cinza Chumbo</h3>
+                    <p>R$ 139,00</p>
+                    <button class="buy-btn">Adicionar à Sacola</button>
+                </article>
+
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=600&q=80" alt="Camiseta Grafite ASTRA" loading="lazy">
+                    <h3>Camiseta Grafite Premium</h3>
+                    <p>R$ 149,00</p>
+                    <button class="buy-btn">Adicionar à Sacola</button>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ASTRA Vestuário. Todos os direitos reservados.</p>
+        <p>Desenvolvido focado em performance e design minimalista.</p>
+    </footer>
+
+    <script>
+        // Script para adicionar interatividade básica aos botões de compra
+        document.addEventListener("DOMContentLoaded", () => {
+            const botoesCompra = document.querySelectorAll(".buy-btn");
+            
+            botoesCompra.forEach(botao => {
+                botao.addEventListener("click", function() {
+                    const nomeProduto = this.parentElement.querySelector("h3").innerText;
+                    
+                    // Altera visualmente o botão para dar feedback ao usuário
+                    const textoOriginal = this.innerText;
+                    this.innerText = "Adicionado!";
+                    this.style.backgroundColor = "#28a745"; 
+                    
+                    // Retorna ao estado original após 2 segundos
+                    setTimeout(() => {
+                        this.innerText = textoOriginal;
+                        this.style.backgroundColor = ""; 
+                    }, 2000);
+                    
+                    console.log(nomeProduto + " foi adicionado à sacola.");
+                });
+            });
+        });
+    </script>
+</body>
+</html>
