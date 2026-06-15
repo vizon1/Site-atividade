@@ -28,6 +28,7 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.5;
+            overflow-x: hidden;
         }
 
         /* Cabeçalho de navegação */
@@ -38,6 +39,7 @@
             padding: 15px 5%;
             background: rgba(251, 251, 253, 0.8);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -53,8 +55,13 @@
             color: var(--accent-color);
         }
 
+        .nav-container {
+            display: flex;
+            align-items: center;
+        }
+
         nav a {
-            margin-left: 20px;
+            margin: 0 15px;
             text-decoration: none;
             color: var(--text-main);
             font-size: 0.9rem;
@@ -63,6 +70,25 @@
 
         nav a:hover {
             color: var(--text-secondary);
+        }
+
+        /* Botão da Sacola no Header */
+        #cart-toggle {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 20px;
+        }
+
+        #cart-toggle:hover {
+            background-color: var(--text-main);
+            color: #ffffff;
         }
 
         /* Seção de destaque principal - Estilo Apple Dark */
@@ -75,9 +101,8 @@
         .hero h1 {
             font-size: 4.5rem;
             font-weight: 700;
-            letter-spacing: -0.06em; /* Letras mais unidas, traço moderno */
+            letter-spacing: -0.06em;
             margin-bottom: 20px;
-            /* Efeito de texto prateado/gradiente */
             background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -152,7 +177,7 @@
             margin-bottom: 20px;
         }
 
-        button {
+        .buy-btn {
             background-color: var(--text-main);
             color: #ffffff;
             border: none;
@@ -164,8 +189,176 @@
             transition: background-color 0.3s ease;
         }
 
-        button:hover {
+        .buy-btn:hover {
             background-color: #424245;
+        }
+
+        /* Estrutura do Carrinho Lateral */
+        .cart-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .cart-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0; right: -450px; width: 400px; max-width: 100%; height: 100vh;
+            background: rgba(251, 251, 253, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1002;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+            transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 25px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-main);
+            transition: opacity 0.2s;
+        }
+
+        .close-cart:hover {
+            opacity: 0.6;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+        }
+
+        /* Mensagem de carrinho vazio */
+        .empty-cart-msg {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 50px;
+            font-size: 1rem;
+        }
+
+        /* Item dentro da sacola */
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            align-items: center;
+        }
+
+        .cart-item img {
+            width: 70px;
+            height: 70px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-price {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .cart-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cart-controls button {
+            background: #e5e5ea;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text-main);
+            transition: background 0.2s;
+        }
+
+        .cart-controls button:hover {
+            background: #d1d1d6;
+        }
+
+        .cart-controls span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            min-width: 15px;
+            text-align: center;
+        }
+
+        .cart-footer {
+            padding: 25px;
+            border-top: 1px solid var(--border-color);
+            background: var(--bg-color);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent-color);
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background: #333333;
         }
 
         /* Rodapé */
@@ -193,8 +386,17 @@
                 flex-direction: column;
                 gap: 15px;
             }
+            .nav-container {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
             nav a {
-                margin: 0 10px;
+                margin: 0 5px;
+            }
+            #cart-toggle {
+                margin-left: 0;
+                margin-top: 10px;
             }
         }
     </style>
@@ -203,12 +405,33 @@
 
     <header>
         <a href="#" class="logo">ASTRA</a>
-        <nav>
-            <a href="#lancamentos">Lançamentos</a>
-            <a href="#masculino">Masculino</a>
-            <a href="#feminino">Feminino</a>
-        </nav>
+        <div class="nav-container">
+            <nav>
+                <a href="#lancamentos">Lançamentos</a>
+                <a href="#masculino">Masculino</a>
+                <a href="#feminino">Feminino</a>
+            </nav>
+            <button id="cart-toggle">Sacola (0)</button>
+        </div>
     </header>
+
+    <div id="cart-overlay" class="cart-overlay"></div>
+    <aside id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Sua Sacola</h2>
+            <button id="close-cart" class="close-cart">&times;</button>
+        </div>
+        <div id="cart-items" class="cart-items">
+            <p class="empty-cart-msg">Sua sacola está vazia.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <span id="cart-total-price">R$ 0,00</span>
+            </div>
+            <button id="checkout-btn" class="checkout-btn">Finalizar Compra</button>
+        </div>
+    </aside>
 
     <main>
         <section class="hero">
@@ -257,27 +480,129 @@
     </footer>
 
     <script>
-        // Script para adicionar interatividade básica aos botões de compra
         document.addEventListener("DOMContentLoaded", () => {
-            const botoesCompra = document.querySelectorAll(".buy-btn");
+            // Estado do Carrinho
+            let cart = [];
             
-            botoesCompra.forEach(botao => {
-                botao.addEventListener("click", function() {
-                    const nomeProduto = this.parentElement.querySelector("h3").innerText;
+            // Elementos do DOM
+            const cartSidebar = document.getElementById('cart-sidebar');
+            const cartOverlay = document.getElementById('cart-overlay');
+            const cartToggle = document.getElementById('cart-toggle');
+            const closeCartBtn = document.getElementById('close-cart');
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalEl = document.getElementById('cart-total-price');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            // Função para abrir/fechar o carrinho
+            const toggleCart = () => {
+                cartSidebar.classList.toggle('active');
+                cartOverlay.classList.toggle('active');
+            };
+
+            cartToggle.addEventListener('click', toggleCart);
+            closeCartBtn.addEventListener('click', toggleCart);
+            cartOverlay.addEventListener('click', toggleCart);
+
+            // Atualiza a interface da sacola
+            const updateCartUI = () => {
+                cartItemsContainer.innerHTML = '';
+                let total = 0;
+                let itemCount = 0;
+
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Sua sacola está vazia.</p>';
+                } else {
+                    cart.forEach(item => {
+                        total += item.price * item.quantity;
+                        itemCount += item.quantity;
+
+                        const itemEl = document.createElement('div');
+                        itemEl.className = 'cart-item';
+                        itemEl.innerHTML = `
+                            <img src="${item.img}" alt="${item.name}">
+                            <div class="cart-item-info">
+                                <div class="cart-item-title">${item.name}</div>
+                                <div class="cart-item-price">R$ ${item.price.toFixed(2).replace('.', ',')}</div>
+                                <div class="cart-controls">
+                                    <button class="qty-btn" data-name="${item.name}" data-delta="-1">-</button>
+                                    <span>${item.quantity}</span>
+                                    <button class="qty-btn" data-name="${item.name}" data-delta="1">+</button>
+                                </div>
+                            </div>
+                        `;
+                        cartItemsContainer.appendChild(itemEl);
+                    });
+                }
+
+                cartTotalEl.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+                cartToggle.innerText = `Sacola (${itemCount})`;
+            };
+
+            // Função de aumentar/diminuir quantidade via Delegação de Eventos
+            cartItemsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('qty-btn')) {
+                    const name = e.target.getAttribute('data-name');
+                    const delta = parseInt(e.target.getAttribute('data-delta'));
                     
-                    // Altera visualmente o botão para dar feedback ao usuário
+                    const itemIndex = cart.findIndex(i => i.name === name);
+                    if (itemIndex > -1) {
+                        cart[itemIndex].quantity += delta;
+                        
+                        // Se chegar a zero, remove do array
+                        if (cart[itemIndex].quantity <= 0) {
+                            cart.splice(itemIndex, 1);
+                        }
+                        updateCartUI();
+                    }
+                }
+            });
+
+            // Lógica de adicionar ao carrinho direto da loja
+            document.querySelectorAll(".buy-btn").forEach(botao => {
+                botao.addEventListener("click", function() {
+                    const card = this.closest('.card');
+                    const name = card.querySelector("h3").innerText;
+                    const priceText = card.querySelector("p").innerText;
+                    // Converte a string "R$ 129,00" para número float
+                    const price = parseFloat(priceText.replace("R$ ", "").replace(",", "."));
+                    const img = card.querySelector("img").src;
+
+                    // Checa se o item já existe na sacola
+                    const existingItem = cart.find(item => item.name === name);
+                    if (existingItem) {
+                        existingItem.quantity += 1;
+                    } else {
+                        cart.push({ name, price, quantity: 1, img });
+                    }
+
+                    updateCartUI();
+
+                    // Feedback visual no botão
                     const textoOriginal = this.innerText;
                     this.innerText = "Adicionado!";
                     this.style.backgroundColor = "#28a745"; 
                     
-                    // Retorna ao estado original após 2 segundos
                     setTimeout(() => {
                         this.innerText = textoOriginal;
                         this.style.backgroundColor = ""; 
                     }, 2000);
                     
-                    console.log(nomeProduto + " foi adicionado à sacola.");
+                    // Abre o carrinho automaticamente para mostrar que foi adicionado
+                    cartSidebar.classList.add('active');
+                    cartOverlay.classList.add('active');
                 });
+            });
+
+            // Botão de Checkout (Apenas Simulação)
+            checkoutBtn.addEventListener('click', () => {
+                if (cart.length > 0) {
+                    alert('Compra finalizada com sucesso! Esta é apenas uma simulação.');
+                    cart = [];
+                    updateCartUI();
+                    toggleCart();
+                } else {
+                    alert('Sua sacola já está vazia.');
+                }
             });
         });
     </script>
