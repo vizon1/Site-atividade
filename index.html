@@ -6,7 +6,6 @@
     <title>ASTRA | Vestuário Minimalista</title>
     <meta name="description" content="Loja virtual ASTRA. Roupas minimalistas com design premium e alta qualidade.">
     <style>
-        /* Variáveis de cor e estilo */
         :root {
             --bg-color: #fbfbfd;
             --text-main: #1d1d1f;
@@ -15,7 +14,6 @@
             --border-color: #d2d2d7;
         }
 
-        /* Reset e tipografia base */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -31,7 +29,6 @@
             overflow-x: hidden;
         }
 
-        /* Cabeçalho de navegação */
         header {
             display: flex;
             justify-content: space-between;
@@ -72,7 +69,6 @@
             color: var(--text-secondary);
         }
 
-        /* Botão da Sacola no Header */
         #cart-toggle {
             background: transparent;
             color: var(--text-main);
@@ -91,7 +87,6 @@
             color: #ffffff;
         }
 
-        /* Seção de destaque principal - Estilo Apple Dark */
         .hero {
             text-align: center;
             padding: 140px 20px;
@@ -120,7 +115,6 @@
             letter-spacing: -0.01em;
         }
 
-        /* Grid de Produtos */
         .products-container {
             max-width: 1200px;
             margin: 60px auto;
@@ -141,7 +135,6 @@
             gap: 40px;
         }
 
-        /* Cartão de Produto individual */
         .card {
             background: #ffffff;
             border-radius: 16px;
@@ -193,7 +186,6 @@
             background-color: #424245;
         }
 
-        /* Estrutura do Carrinho Lateral */
         .cart-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -259,7 +251,6 @@
             padding: 25px;
         }
 
-        /* Mensagem de carrinho vazio */
         .empty-cart-msg {
             text-align: center;
             color: var(--text-secondary);
@@ -267,7 +258,6 @@
             font-size: 1rem;
         }
 
-        /* Item dentro da sacola */
         .cart-item {
             display: flex;
             gap: 15px;
@@ -361,7 +351,6 @@
             background: #333333;
         }
 
-        /* Rodapé */
         footer {
             text-align: center;
             padding: 40px 20px;
@@ -371,7 +360,6 @@
             font-size: 0.85rem;
         }
 
-        /* Regras de Responsividade para Celulares */
         @media (max-width: 768px) {
             .hero {
                 padding: 100px 20px;
@@ -481,10 +469,8 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Estado do Carrinho
             let cart = [];
             
-            // Elementos do DOM
             const cartSidebar = document.getElementById('cart-sidebar');
             const cartOverlay = document.getElementById('cart-overlay');
             const cartToggle = document.getElementById('cart-toggle');
@@ -493,7 +479,6 @@
             const cartTotalEl = document.getElementById('cart-total-price');
             const checkoutBtn = document.getElementById('checkout-btn');
 
-            // Função para abrir/fechar o carrinho
             const toggleCart = () => {
                 cartSidebar.classList.toggle('active');
                 cartOverlay.classList.toggle('active');
@@ -503,7 +488,6 @@
             closeCartBtn.addEventListener('click', toggleCart);
             cartOverlay.addEventListener('click', toggleCart);
 
-            // Atualiza a interface da sacola
             const updateCartUI = () => {
                 cartItemsContainer.innerHTML = '';
                 let total = 0;
@@ -538,7 +522,6 @@
                 cartToggle.innerText = `Sacola (${itemCount})`;
             };
 
-            // Função de aumentar/diminuir quantidade via Delegação de Eventos
             cartItemsContainer.addEventListener('click', (e) => {
                 if (e.target.classList.contains('qty-btn')) {
                     const name = e.target.getAttribute('data-name');
@@ -548,7 +531,6 @@
                     if (itemIndex > -1) {
                         cart[itemIndex].quantity += delta;
                         
-                        // Se chegar a zero, remove do array
                         if (cart[itemIndex].quantity <= 0) {
                             cart.splice(itemIndex, 1);
                         }
@@ -557,17 +539,14 @@
                 }
             });
 
-            // Lógica de adicionar ao carrinho direto da loja
             document.querySelectorAll(".buy-btn").forEach(botao => {
                 botao.addEventListener("click", function() {
                     const card = this.closest('.card');
                     const name = card.querySelector("h3").innerText;
                     const priceText = card.querySelector("p").innerText;
-                    // Converte a string "R$ 129,00" para número float
                     const price = parseFloat(priceText.replace("R$ ", "").replace(",", "."));
                     const img = card.querySelector("img").src;
 
-                    // Checa se o item já existe na sacola
                     const existingItem = cart.find(item => item.name === name);
                     if (existingItem) {
                         existingItem.quantity += 1;
@@ -577,7 +556,6 @@
 
                     updateCartUI();
 
-                    // Feedback visual no botão
                     const textoOriginal = this.innerText;
                     this.innerText = "Adicionado!";
                     this.style.backgroundColor = "#28a745"; 
@@ -587,13 +565,11 @@
                         this.style.backgroundColor = ""; 
                     }, 2000);
                     
-
                     cartSidebar.classList.add('active');
                     cartOverlay.classList.add('active');
                 });
             });
 
-            // Botão de Checkout (Apenas Simulação)
             checkoutBtn.addEventListener('click', () => {
                 if (cart.length > 0) {
                     alert('Compra finalizada com sucesso!, bom trabalho professor :).');
